@@ -1,0 +1,41 @@
+from abc import ABC, abstractmethod
+import math
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+# Круг
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return f"Площадь круга: {round(math.pi * self.radius ** 2, 1)}"
+
+# Прямоугольник
+class Rectangle(Shape):
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def area(self):
+        return f"Площадь прямоугольника: {self.a * self.b}"
+
+# Треугольник
+class Triangle(Shape):
+    def __init__(self, a, h):
+        self.a = a
+        self.h = h
+
+    def area(self):
+        return f"Площадь треугольника: {0.5 * self.a * self.h}"
+
+circle = Circle(5)
+rectangle = Rectangle(4, 6)
+triangle = Triangle(3, 4)
+
+print(circle.area())
+print(rectangle.area())
+print(triangle.area())
