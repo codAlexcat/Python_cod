@@ -43,3 +43,478 @@ body {
     opacity: 0.09;
     pointer-events: none;
 }
+
+.sidebar nav {
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    margin: 4px 0;
+    color: #94A3B8;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.sidebar nav a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFFFFF;
+}
+
+.sidebar nav a.active {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60A5FA;
+}
+
+/* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+.content {
+    flex: 1;
+    padding: 32px 40px;
+    background: #F8FAFC;
+}
+
+/* Заголовки */
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #0F172A;
+    margin-bottom: 28px;
+    letter-spacing: -0.3px;
+}
+
+h2, h3 {
+    font-weight: 600;
+    color: #1E293B;
+}
+
+/* ========== КАРТОЧКИ (ГЛАВНАЯ) ========== */
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
+    border: 1px solid #E2E8F0;
+}
+
+.card:hover {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #0F172A;
+}
+
+/* Статистика проблем */
+.stats-list {
+    margin-top: 8px;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.stat-month {
+    font-weight: 500;
+    color: #475569;
+}
+
+.stat-count {
+    font-weight: 600;
+    color: #3B82F6;
+    background: #EFF6FF;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.details-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    color: #3B82F6;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: gap 0.2s;
+}
+
+.details-link:hover {
+    gap: 10px;
+    color: #2563EB;
+}
+
+/* ========== КАРТОЧКИ АУДИТОРИЙ ========== */
+.rooms-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.room-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 20px;
+    transition: all 0.2s ease;
+    border: 1px solid #E2E8F0;
+    position: relative;
+    overflow: hidden;
+}
+
+.room-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+    border-color: #CBD5E1;
+}
+
+/* Статусные подсветки */
+.room-card.free {
+    background: #FFFFFF;
+}
+
+.room-card.busy {
+    background: #FEF2F2;
+    border-left: 4px solid #EF4444;
+}
+
+.room-card.booked-future {
+    background: #FEFCE8;
+    border-left: 4px solid #EAB308;
+}
+
+.room-card h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #0F172A;
+}
+
+.room-card p {
+    color: #64748B;
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+/* Кнопка бронирования */
+.book-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 8px 16px;
+    background: #3B82F6;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.book-link:hover {
+    background: #2563EB;
+    gap: 12px;
+}
+
+/* ========== ФОРМЫ ========== */
+.form-card, .room-problems {
+    background: #FFFFFF;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 32px;
+    border-radius: 24px;
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
+}
+
+.form-card h2, .room-problems h2 {
+    font-size: 22px;
+    margin-bottom: 24px;
+    color: #0F172A;
+}
+
+.form-card label, .add-problem-form label {
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #334155;
+}
+
+.form-card input, .form-card select, 
+.add-problem-form textarea, .add-problem-form input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #CBD5E1;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    background: #FFFFFF;
+}
+
+.form-card input:focus, .form-card select:focus,
+.add-problem-form textarea:focus, .add-problem-form input:focus {
+    outline: none;
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+button {
+    margin-top: 24px;
+    padding: 10px 20px;
+    background: #3B82F6;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+button:hover {
+    background: #2563EB;
+    transform: translateY(-1px);
+}
+
+/* ========== СТРАНИЦА ЖАЛОБ (СПИСОК) ========== */
+.complaints-rooms {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.complaint-room-item {
+    background: #FFFFFF;
+    padding: 4px;
+    border-radius: 14px;
+    border: 1px solid #E2E8F0;
+    transition: all 0.2s;
+}
+
+.complaint-room-item:hover {
+    border-color: #CBD5E1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.complaint-room-link {
+    display: block;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: #1E293B;
+    font-weight: 500;
+    border-radius: 12px;
+}
+
+.complaint-room-link:hover {
+    background: #F8FAFC;
+    color: #3B82F6;
+}
+
+/* ========== КАРТОЧКИ ПРОБЛЕМ ========== */
+.problem-card {
+    background: #FEFCE8;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+    border: 1px solid #FEF08A;
+}
+
+.problem-card p {
+    margin: 8px 0;
+    color: #713F12;
+}
+
+.problem-card strong {
+    color: #854D0E;
+}
+
+.problem-card button {
+    background: #EF4444;
+    margin-top: 12px;
+    width: auto;
+    padding: 8px 16px;
+}
+
+.problem-card button:hover {
+    background: #DC2626;
+}
+
+/* ========== КОНТАКТЫ ========== */
+.contacts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.contact-card {
+    background: #FFFFFF;
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid #E2E8F0;
+    transition: all 0.2s;
+}
+
+.contact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #0F172A;
+}
+
+.contact-card p {
+    margin: 8px 0;
+    color: #64748B;
+    font-size: 14px;
+}
+
+/* ========== ДОПОЛНИТЕЛЬНЫЕ БЛОКИ ========== */
+.add-problem-form {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #E2E8F0;
+}
+
+.add-problem-form h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+        padding: 20px 8px;
+    }
+    
+    .sidebar nav a span:not(:first-child) {
+        display: none;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .rooms-list {
+        grid-template-columns: 1fr;
+    }
+}
+/* Текущее бронирование */
+.current-booking {
+    background: #EFF6FF;
+    padding: 12px;
+    border-radius: 12px;
+    margin: 12px 0;
+    border-left: 3px solid #3B82F6;
+}
+
+.current-booking p {
+    margin: 4px 0;
+    font-size: 13px;
+}
+
+/* Список всех бронирований */
+.all-bookings {
+    margin: 12px 0;
+}
+
+.all-bookings details {
+    cursor: pointer;
+}
+
+.all-bookings summary {
+    padding: 8px 0;
+    color: #3B82F6;
+    font-size: 13px;
+}
+
+.all-bookings summary:hover {
+    color: #2563EB;
+}
+
+.bookings-list {
+    margin-top: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #F8FAFC;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.booking-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid #E2E8F0;
+    font-size: 12px;
+}
+
+.booking-item:last-child {
+    border-bottom: none;
+}
+
+.booking-person {
+    font-weight: 600;
+    color: #1E293B;
+    min-width: 100px;
+}
+
+.booking-purpose {
+    color: #3B82F6;
+    background: #EFF6FF;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    margin: 0 8px;
+}
+
+.booking-date {
+    color: #64748B;
+    font-size: 11px;
+}
+
+/* Стилизация скролла для списка бронирований */
+.bookings-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.bookings-list::-webkit-scrollbar-track {
+    background: #E2E8F0;
+    border-radius: 10px;
+}
+
+.bookings-list::-webkit-scrollbar-thumb {
+    background: #94A3B8;
+    border-radius: 10px;
+}
