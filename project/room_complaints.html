@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Проблемы аудитории</h1>
+
+<div class="room-problems">
+    <h2>{{ room_name }}</h2>
+
+    {% if problems %}
+        {% for p in problems %}
+        <div class="problem-card">
+            <p><strong>Проблема:</strong> {{ p[1] }}</p>
+            <p><strong>Срочность:</strong> {{ p[2] }}/5</p>
+            <p><small>Дата: {{ p[3] }}</small></p>
+            <form method="POST" action="/resolve_complaint">
+                <input type="hidden" name="complaint_id" value="{{ p[0] }}">
+                <input type="hidden" name="room_id" value="{{ room_id }}">
+                <button type="submit">Снять задачу</button>
+            </form>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Нет активных проблем.</p>
+    {% endif %}
+
+    <div class="add-problem-form">
+        <h3>Добавить жалобу</h3>
+        <form method="POST" action="/add_complaint">
+            <input type="hidden" name="room_id" value="{{ room_id }}">
+            <label>Текст проблемы:</label>
+            <textarea name="problem_text" required rows="3"></textarea>
+            <label>Срочность (1-5):</label>
+            <input type="number" name="urgency" min="1" max="5" required>
+            <button type="submit">Добавить жалобу</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
