@@ -1,0 +1,45 @@
+/* Подключаем шрифт Inter  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #F5F7FA;
+    color: #1E293B;
+}
+
+/* Основной контейнер */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Бокавая панель */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    position: relative;
+    min-height: 100vh;
+    padding: 24px 16px;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Изображение на фоне боковой панели */
+.sidebar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/static/fon.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.09;
+    pointer-events: none;
+}
