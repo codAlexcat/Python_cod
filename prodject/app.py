@@ -181,3 +181,43 @@ def room_complaints(room_id):
             return redirect(url_for('complaints_list'))
         problems = cur.execute("SELECT id, problem_text, urgency, created_date FROM complaints WHERE room_id=? AND status='active' ORDER BY urgency DESC", (room_id,)).fetchall()
     return render_template('room_complaints.html', room_id=room_id, room_name=room[0], problems=problems)
+
+# --- Добавление жалобы ---
+@app.route('/add_complaint', methods=['POST'])
+def add_complaint():
+    room_id = request.form['room_id']
+    problem_text = request.form['problem_text']
+    urgency = request.form['urgency']
+    current_month = datetime.now().strftime('%b').lower()
+    with sqlite3.connect('database.db') as conn:
+        cur = conn.cursor()
+        cur.execute("INSERT INTO complaints (room_id, problem_text, urgency, status) VALUES (?,?,?, 'active')",
+                    (room_id, problem_text, urgency))
+        cur.execute("INSERT INTO problems_stats (month, count) VALUES (?, 1) ON CONFLICT(month) DO UPDATE SET count = count + 1", (current_month,))
+        conn.commit()
+    return redirect(url_for('room_complaints', room_id=room_id))
+
+# --- Снятие проблемы ---
+@app.route('/resolve_complaint', methods=['POST'])
+def resolve_complaint():
+    complaint_id = request.form['complaint_id']
+    room_id = request.form['room_id']
+    with sqlite3.connect('database.db') as conn:
+        cur = conn.cursor()
+        cur.execute("UPDATE complaints SET status='resolved' WHERE id=?", (complaint_id,))
+        conn.commit()
+    return redirect(url_for('room_complaints', room_id=room_id))
+
+# --- Помощь ---
+@app.route('/help')
+def help_page():
+    contacts = [
+        {'role': 'Учебная часть', 'phone': '8-800-555-01-01', 'email': 'study@college.ru'},
+        {'role': 'Ремонт проекторов', 'phone': '8-800-555-01-02', 'email': 'tech@college.ru'},
+        {'role': 'Директор', 'phone': '8-800-555-01-03', 'email': 'director@college.ru'},
+        {'role': 'Системный администратор', 'phone': '8-800-555-01-04', 'email': 'admin@college.ru'},
+    ]
+    return render_template('help.html', contacts=contacts)
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
