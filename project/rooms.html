@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Аудитории</h1>
+
+<div class="rooms-list">
+    {% for room in rooms %}
+    <div class="room-card 
+        {% if room.status == 'busy' %}busy
+        {% elif room.status == 'booked_future' %}booked-future
+        {% else %}free{% endif %}">
+        
+        <!-- Название аудитории -->
+        <h3>{{ room.name }}</h3>
+        
+        <!-- Основная информация -->
+        <p>Корпус: {{ room.building }}, {{ room.floor }} этаж</p>
+        <p>Статус: 
+            {% if room.status == 'busy' %}Занято
+            {% elif room.status == 'booked_future' %}Забронировано заранее
+            {% else %}Свободно
+            {% endif %}
+        </p>
+        
+        <!-- ИНФОРМАЦИЯ О ТЕКУЩЕМ БРОНИРОВАНИИ (если есть) -->
+        {% if room.status != 'free' %}
+        <div class="current-booking">
+            <p><strong>Текущее бронирование:</strong></p>
+            <p>Кто: {{ room.booked_by }}</p>
+            <p>Цель: {{ room.purpose }}</p>
+            <p>с {{ room.start_date }} по {{ room.end_date }}</p>
+        </div>
+        {% endif %}
+        
+        <!-- ВСЕ БУДУЩИЕ БРОНИРОВАНИЯ -->
+        {% if room.all_bookings %}
+        <div class="all-bookings">
+            <details>
+                <summary><strong>Все будущие бронирования ({{ room.all_bookings|length }})</strong></summary>
+                <div class="bookings-list">
+                    {% for booking in room.all_bookings %}
+                    <div class="booking-item">
+                        <span class="booking-person">{{ booking[0] }}</span>
+                        <span class="booking-purpose">{{ booking[1] }}</span>
+                        <span class="booking-date">{{ booking[2] }} → {{ booking[3] }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </details>
+        </div>
+        {% endif %}
+        
+        <!-- Кнопка бронирования -->
+        <a href="/book_room/{{ room.id }}" class="book-link">Забронировать</a>
+    </div>
+    {% endfor %}
+</div>
+<h3>Инструкция:</h3>
+<p>1. Выше есть все имеющиеся аудитории. Под каждой аудиторией указано на каком этаже они находятся, и их статус (занята, свободна, забронированно заранее). Второй способ определить занята аудитория или нет это посмотреть на цвет ячейки. Если ячейка красная - аудитория забронированна на ближайщий срок, Жельая - аудитория забронированна заранее за несколько дней</p>
+<p>2. Для того что бы забронировать аудиторию, нажмите на кнопку "забронировать" под аудиторией которая вам нужна, после чего укажите ваще ФИО с какой целью вы бранируете аудиторию и на какой срок</p>
+
+{% endblock %}
